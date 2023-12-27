@@ -1,12 +1,15 @@
 package com.urlshortner.model;
 
 import jakarta.persistence.Id;
+import java.util.Date;
+import lombok.Builder;
 import lombok.Data;
 
-import java.sql.Date;
+
 
 @Data
-public class TinyUrl {
+@Builder
+public class ShortUrl {
     @Id
     private String shortUrl;
     private String originalUrl;
