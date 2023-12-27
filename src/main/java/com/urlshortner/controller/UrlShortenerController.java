@@ -4,6 +4,7 @@ import com.urlshortner.dto.UrlDTO;
 import com.urlshortner.service.UrlShortenerService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,11 +17,11 @@ public class UrlShortenerController {
     @PostMapping("/deflate")
     public String deflate(@RequestBody UrlDTO url){
         UrlDTO processed = urlShortenerService.process(url);
-        return "";
+        return processed.getShortUrl();
     }
 
-    @GetMapping("/{deflated}")
-    public String inflate(){
-        return "";
+    @GetMapping("/public/{deflated}")
+    public UrlDTO inflate(@PathVariable String deflated){
+        return urlShortenerService.fetch(deflated);
     }
 }

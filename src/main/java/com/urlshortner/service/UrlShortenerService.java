@@ -7,19 +7,18 @@ import com.urlshortner.utils.Base62Util;
 import java.io.UnsupportedEncodingException;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Optional;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 @Service
 @Log4j2
+@AllArgsConstructor
 public class UrlShortenerService {
 
   private ShortUrlRepository shortUrlRepository;
-
-  public UrlShortenerService(ShortUrlRepository shortUrlRepository) {
-    this.shortUrlRepository = shortUrlRepository;
-  }
 
   /*
   * if collision increase / multiple instance of shortURL, and we want to scale the short url logic
@@ -50,6 +49,18 @@ public class UrlShortenerService {
 
     return toDTO(shortUrl);
   }
+
+  public UrlDTO fetch(String id) {
+
+    Optional<ShortUrl> byId = shortUrlRepository.findById(id);
+   if( byId.isEmpty()){
+      return UrlDTO.builder().build();
+   }
+
+    return toDTO(byId.get());
+  }
+
+
 
   private String getShortUrl(String url) {
     try {

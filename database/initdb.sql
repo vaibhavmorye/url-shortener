@@ -1,9 +1,10 @@
-create table `shortUrl` (
-`short_url` VARCHAR(10),
-`original_url` VARCHAR(1000),
-`user_id` INT(8),
-`created_at` DATETIME,
-`last_visited` DATETIME,
-`visit_count` INT(8),
-`expired_at` DATETIME
-)
+CREATE TABLE SHORT_URL
+(
+SHORT_URL VARCHAR(10) PRIMARY KEY,,
+ORIGINAL_URL VARCHAR(1000),
+USER_ID INT(8),
+CREATED_AT DATETIME,
+LAST_VISITED DATETIME,
+VISIT_COUNT INT(8),
+EXPIRED_AT DATETIME
+);
