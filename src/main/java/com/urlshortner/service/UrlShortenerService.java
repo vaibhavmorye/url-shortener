@@ -51,16 +51,12 @@ public class UrlShortenerService {
   }
 
   public UrlDTO fetch(String id) {
-
     Optional<ShortUrl> byId = shortUrlRepository.findById(id);
-   if( byId.isEmpty()){
+    if (byId.isEmpty()) {
       return UrlDTO.builder().build();
-   }
-
+    }
     return toDTO(byId.get());
   }
-
-
 
   private String getShortUrl(String url) {
     try {
