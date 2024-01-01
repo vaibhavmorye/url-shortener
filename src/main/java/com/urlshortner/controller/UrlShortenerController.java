@@ -1,27 +1,24 @@
 package com.urlshortner.controller;
 
-import com.urlshortner.dto.UrlDTO;
+import com.urlshortner.dto.ProcessURLRequest;
 import com.urlshortner.service.UrlShortenerService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController()
+@RequestMapping("/api/v1")
 @AllArgsConstructor
 public class UrlShortenerController {
 
     private final UrlShortenerService urlShortenerService;
     @PostMapping("/deflate")
-    public String deflate(@RequestBody UrlDTO url){
-        UrlDTO processed = urlShortenerService.process(url);
+    public String deflate(@RequestBody ProcessURLRequest url){
+        ProcessURLRequest processed = urlShortenerService.process(url);
         return processed.getShortUrl();
     }
 
     @GetMapping("/public/{deflated}")
-    public UrlDTO inflate(@PathVariable String deflated){
+    public ProcessURLRequest inflate(@PathVariable String deflated){
         return urlShortenerService.fetch(deflated);
     }
 }

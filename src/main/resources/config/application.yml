@@ -1,12 +1,17 @@
 server:
   port: 8081
 
+jwt:
+  secret: VEHhqZdVQYgYG3NAl4D3sVF9GjZNgfj1VEHhqZdVQYgYG3NAl4D3sVF9GjZNgfj1VEHhqZdVQYgYG3NAl4D3sVF9GjZNgfj1
+  expiration-timeout-ms: 80000
+  cookie: barer
+
 spring:
   datasource:
     url: jdbc:h2:file:~/urlshortner
     driverClassName: org.h2.Driver
-    username: sa
-    password: password
+    username: h2
+    password:
   h2:
     console:
       enabled: true

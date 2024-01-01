@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UrlDTO {
+public class ProcessURLRequest {
     private String url;
     private String originalUrl;
     private String shortUrl;

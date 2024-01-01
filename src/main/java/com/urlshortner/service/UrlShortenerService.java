@@ -1,6 +1,6 @@
 package com.urlshortner.service;
 
-import com.urlshortner.dto.UrlDTO;
+import com.urlshortner.dto.ProcessURLRequest;
 import com.urlshortner.model.ShortUrl;
 import com.urlshortner.repository.ShortUrlRepository;
 import com.urlshortner.utils.Base62Util;
@@ -36,11 +36,11 @@ public class UrlShortenerService {
   }
   * */
 
-  public UrlDTO process(UrlDTO urlDTO) {
+  public ProcessURLRequest process(ProcessURLRequest processURLRequest) {
     ShortUrl shortUrl =
         ShortUrl.builder()
-            .shortUrl(getShortUrl(urlDTO.getUrl()))
-            .originalUrl(urlDTO.getUrl())
+            .shortUrl(getShortUrl(processURLRequest.getUrl()))
+            .originalUrl(processURLRequest.getUrl())
             .expiredAt(Date.from(new Date().toInstant().plus(1, ChronoUnit.DAYS)))
             .createdAt(new Date())
             .lastVisited(new Date())
@@ -50,10 +50,10 @@ public class UrlShortenerService {
     return toDTO(shortUrl);
   }
 
-  public UrlDTO fetch(String id) {
+  public ProcessURLRequest fetch(String id) {
     Optional<ShortUrl> byId = shortUrlRepository.findById(id);
     if (byId.isEmpty()) {
-      return UrlDTO.builder().build();
+      return ProcessURLRequest.builder().build();
     }
     return toDTO(byId.get());
   }
@@ -68,8 +68,8 @@ public class UrlShortenerService {
     return null;
   }
 
-  private UrlDTO toDTO(ShortUrl shortUrl) {
-    return UrlDTO.builder()
+  private ProcessURLRequest toDTO(ShortUrl shortUrl) {
+    return ProcessURLRequest.builder()
         .shortUrl(shortUrl.getShortUrl())
         .originalUrl(shortUrl.getOriginalUrl())
         .expiredAt(shortUrl.getExpiredAt())

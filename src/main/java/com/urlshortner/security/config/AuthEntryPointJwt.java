@@ -7,8 +7,10 @@ import java.io.IOException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
 @Log4j2
+@Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
   @Override
